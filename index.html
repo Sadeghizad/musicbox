@@ -1,119 +1,12 @@
 <!DOCTYPE html>
 <html lang="fa" dir="rtl">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>هدیه‌ای فراتر از تصویر | طراحی اختصاصی</title>
-<style>
-  :root { 
-      --dk-red: #ef394e; 
-      --dk-red-hover: #d32f2f;
-      --dk-grey: #f7f9fc; 
-      --dk-text: #2c3e50; 
-      --dk-blue: #19bfd3; 
-      --white: #ffffff;
-      --shadow: 0 10px 30px rgba(0,0,0,0.08);
-  }
-  
-  * { box-sizing: border-box; outline: none; font-family: 'IRANSans', 'Tahoma', sans-serif; }
-  html { scroll-behavior: smooth; }
-  body { background: var(--white); color: var(--dk-text); margin: 0; padding: 0; line-height: 1.6; }
-  
-  /* --- NAVBAR --- */
-  .navbar { position: sticky; top: 0; background: rgba(255,255,255,0.95); backdrop-filter: blur(10px); z-index: 1000; box-shadow: 0 2px 10px rgba(0,0,0,0.05); padding: 15px 0; }
-  .nav-container { max-width: 1200px; margin: 0 auto; display: flex; justify-content: space-between; align-items: center; padding: 0 20px; }
-  .logo { font-weight: 900; font-size: 24px; color: var(--dk-red); text-decoration: none; }
-  .nav-links { display: flex; gap: 25px; }
-  .nav-links a { text-decoration: none; color: var(--dk-text); font-weight: 500; font-size: 14px; transition: 0.2s; cursor: pointer; }
-  .nav-links a:hover { color: var(--dk-red); }
-  .cta-small { background: var(--dk-red); color: white !important; padding: 8px 20px; border-radius: 50px; }
-
-  /* --- HERO SECTION --- */
-  .hero-section { height: 90vh; min-height: 600px; display: flex; align-items: center; justify-content: center; text-align: center; background: radial-gradient(circle at center, #fff5f6 0%, #fff 70%); padding: 20px; }
-  .hero-content { max-width: 800px; animation: fadeIn 1s ease-out; }
-  h1.main-title { font-size: 3rem; margin-bottom: 20px; line-height: 1.4; color: #1a1a1a; }
-  .highlight-text { color: var(--dk-red); }
-  .sub-title { font-size: 1.5rem; color: #666; display: flex; justify-content: center; gap: 8px; align-items: center; flex-wrap: wrap; }
-  .animated-word { font-weight: bold; color: var(--dk-text); border-bottom: 2px solid var(--dk-blue); min-width: 100px; text-align: center; transition: all 0.3s; }
-  .scroll-down-btn { margin-top: 50px; display: inline-block; padding: 15px 40px; background: var(--dk-text); color: white; text-decoration: none; border-radius: 50px; font-weight: bold; transition: 0.3s; box-shadow: var(--shadow); }
-  .scroll-down-btn:hover { transform: translateY(-3px); box-shadow: 0 15px 30px rgba(0,0,0,0.15); }
-
-  /* --- AI ADVISOR --- */
-  .ai-section { background: var(--dk-grey); padding: 80px 20px; text-align: center; }
-  .section-title { font-size: 2rem; margin-bottom: 40px; position: relative; display: inline-block; }
-  .section-title::after { content: ''; display: block; width: 60px; height: 4px; background: var(--dk-red); margin: 15px auto 0; border-radius: 2px; }
-  
-  .ai-card { background: white; max-width: 900px; margin: 0 auto; padding: 40px; border-radius: 20px; box-shadow: var(--shadow); display: grid; grid-template-columns: 1fr 1fr; gap: 40px; align-items: center; }
-  .ai-text h3 { margin-top: 0; font-size: 1.5rem; }
-  .ai-text p { color: #666; margin-bottom: 30px; }
-  .quiz-box { display: flex; flex-direction: column; gap: 15px; }
-  .quiz-select { padding: 12px; border: 2px solid #eee; border-radius: 8px; font-size: 14px; background: #fff; cursor: pointer; }
-  .ai-btn { background: linear-gradient(45deg, var(--dk-blue), #2980b9); color: white; border: none; padding: 15px; border-radius: 8px; cursor: pointer; font-weight: bold; transition: 0.3s; }
-  .ai-btn:hover { filter: brightness(1.1); }
-  
-  @media(max-width: 768px) { .ai-card { grid-template-columns: 1fr; } h1.main-title { font-size: 2rem; } }
-
-  /* --- CUSTOMIZER (Integrated) --- */
-  .customizer-section { padding: 80px 20px; background: #fff; }
-  /* (Styles from previous code adapted here) */
-  .builder-container { max-width: 1200px; margin: 0 auto; display: grid; grid-template-columns: 1fr 380px; gap: 40px; }
-  .canvas-area { background: #f4f4f4; border-radius: 12px; overflow: hidden; display: flex; flex-direction: column; align-items: center; padding: 20px; box-shadow: inset 0 0 20px rgba(0,0,0,0.03); }
-  .canvas-wrapper { width: 100%; max-width: 600px; position: relative; cursor: grab; margin-bottom: 20px; box-shadow: 0 5px 15px rgba(0,0,0,0.1); border-radius: 4px; }
-  .canvas-wrapper:active { cursor: grabbing; }
-  #mainCanvas { width: 100%; display: block; }
-  
-  .controls-area { background: #fff; padding: 25px; border-radius: 12px; border: 1px solid #eee; height: fit-content; position: sticky; top: 100px; }
-  .ctrl-group { margin-bottom: 25px; }
-  .ctrl-label { display: block; font-weight: bold; margin-bottom: 10px; font-size: 14px; color: #444; }
-  
-  .opt-chips { display: flex; gap: 8px; flex-wrap: wrap; }
-  .chip { padding: 8px 16px; border: 1px solid #ddd; border-radius: 20px; font-size: 13px; cursor: pointer; transition: 0.2s; background: #fff; }
-  .chip.active { background: var(--dk-text); color: white; border-color: var(--dk-text); }
-  .color-dot { width: 35px; height: 35px; border-radius: 50%; border: 2px solid white; box-shadow: 0 0 0 1px #ddd; cursor: pointer; transition: 0.2s; }
-  .color-dot.active { transform: scale(1.1); box-shadow: 0 0 0 2px var(--dk-red); }
-  
-  .upload-zone { border: 2px dashed #ccc; padding: 20px; text-align: center; border-radius: 8px; cursor: pointer; transition: 0.2s; background: #fafafa; }
-  .upload-zone:hover { border-color: var(--dk-blue); background: #f0fbff; }
-  .upload-zone.done { border-style: solid; border-color: #4caf50; background: #e8f5e9; }
-  
-  .tool-row { display: flex; gap: 10px; margin-top: 10px; align-items: center; }
-  .icon-btn { width: 40px; height: 40px; display: flex; align-items: center; justify-content: center; border: 1px solid #ddd; border-radius: 6px; cursor: pointer; background: white; }
-  .slider-box { flex: 1; display: flex; align-items: center; gap: 10px; font-size: 12px; }
-  .slider-box input { width: 100%; }
-
-  .thumbs-row { display: flex; gap: 10px; justify-content: center; flex-wrap: wrap; margin-top: auto; }
-  .thumb-item { width: 70px; height: 70px; border: 2px solid #ddd; border-radius: 8px; cursor: pointer; overflow: hidden; opacity: 0.7; transition: 0.2s; background: #fff; }
-  .thumb-item.active { border-color: var(--dk-red); opacity: 1; transform: translateY(-3px); }
-  .thumb-item canvas { width: 100%; height: 100%; object-fit: contain; }
-
-  .final-btn { width: 100%; padding: 18px; background: var(--dk-red); color: white; border: none; border-radius: 8px; font-size: 16px; font-weight: bold; cursor: pointer; transition: 0.2s; margin-top: 20px; }
-  .final-btn:hover { background: var(--dk-red-hover); }
-  .final-btn:disabled { background: #ddd; cursor: not-allowed; }
-
-  @media(max-width: 900px) { .builder-container { grid-template-columns: 1fr; } .controls-area { position: static; } }
-
-  /* --- REVIEWS --- */
-  .reviews-section { padding: 60px 20px; background: var(--dk-text); color: white; overflow: hidden; }
-  .reviews-track { display: flex; gap: 30px; overflow-x: auto; padding-bottom: 20px; scroll-snap-type: x mandatory; -webkit-overflow-scrolling: touch; }
-  .review-card { min-width: 300px; background: rgba(255,255,255,0.1); padding: 25px; border-radius: 12px; scroll-snap-align: start; border-left: 4px solid var(--dk-red); }
-  .review-text { font-style: italic; font-size: 15px; margin-bottom: 15px; line-height: 1.6; }
-  .review-meta { font-size: 13px; color: rgba(255,255,255,0.6); }
-
-  /* --- FAQ --- */
-  .faq-section { padding: 80px 20px; background: #fff; max-width: 800px; margin: 0 auto; }
-  details { margin-bottom: 15px; border: 1px solid #eee; border-radius: 8px; overflow: hidden; }
-  summary { padding: 20px; background: #f9f9f9; cursor: pointer; font-weight: bold; list-style: none; position: relative; }
-  summary::after { content: '+'; position: absolute; left: 20px; font-size: 20px; color: var(--dk-red); }
-  details[open] summary::after { content: '-'; }
-  .faq-content { padding: 20px; background: #fff; color: #555; font-size: 14px; }
-
-  /* --- LOADER --- */
-  .loader { position: fixed; inset: 0; background: rgba(255,255,255,0.9); z-index: 2000; display: flex; justify-content: center; align-items: center; flex-direction: column; }
-  .spinner { width: 50px; height: 50px; border: 5px solid #eee; border-top-color: var(--dk-red); border-radius: 50%; animation: spin 1s linear infinite; }
-  @keyframes spin { 100% { transform: rotate(360deg); } }
-  @keyframes fadeIn { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
-
-</style>
+    <meta charset="UTF-8">
+    <!-- تغییر حیاتی برای موبایل: جلوگیری از زوم ناخواسته هنگام کار با کانواس -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>هدیه‌ای فراتر از تصویر | طراحی اختصاصی</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
 </head>
 <body>
 
@@ -121,11 +14,17 @@
 <nav class="navbar">
     <div class="nav-container">
         <a href="#" class="logo">موزیک باکس</a>
+        <!-- دکمه همبرگری برای موبایل (در CSS مدیریت می‌شود) -->
+        <div class="menu-toggle" id="mobile-menu">
+            <span class="bar"></span>
+            <span class="bar"></span>
+            <span class="bar"></span>
+        </div>
         <div class="nav-links">
             <a href="#hero">خانه</a>
             <a href="#customizer">طراحی آنلاین</a>
+            <a href="#gallery">گالری</a>
             <a href="#reviews">نظرات</a>
-            <a href="#faq">سوالات</a>
         </div>
         <a href="#customizer" class="cta-small">شروع طراحی</a>
     </div>
@@ -168,7 +67,7 @@
                 <option value="minimal">مینیمال و ساده</option>
                 <option value="luxury">لوکس و سنگین</option>
             </select>
-            <button class="ai-btn" onclick="applyAiSuggestion()">پیشنهاد هوشمند و شروع طراحی ✨</button>
+            <button class="ai-btn" id="aiBtn">پیشنهاد هوشمند و شروع طراحی ✨</button>
         </div>
     </div>
 </section>
@@ -180,7 +79,8 @@
         <!-- Left: Canvas -->
         <div class="canvas-area">
             <div class="canvas-wrapper">
-                <canvas id="mainCanvas"></canvas>
+                <!-- نکته مهم: استایل touch-action باعث می‌شود در موبایل وقتی انگشت روی کانواس است صفحه اسکرول نشود -->
+                <canvas id="mainCanvas" style="touch-action: none;"></canvas>
             </div>
             <div class="thumbs-row" id="thumbsContainer"></div>
         </div>
@@ -212,6 +112,8 @@
                         <input type="range" id="zoomRange" min="10" max="300" value="100">
                     </div>
                 </div>
+                <!-- راهنمای متنی فقط برای موبایل که با CSS نمایش داده خواهد شد -->
+                <p class="mobile-hint" style="display:none; font-size:11px; color:#888; margin-top:5px;">💡 برای جابجایی عکس، انگشت خود را روی تصویر بکشید.</p>
             </div>
 
             <div class="ctrl-group">
@@ -228,32 +130,71 @@
     </div>
 </section>
 
-<!-- Reviews -->
+<!-- Reviews Section -->
 <section id="reviews" class="reviews-section">
-    <div class="nav-container" style="display:block">
-        <h2 style="margin-bottom:30px; text-align:center">تجربه دیگران از این هدیه</h2>
-        <div class="reviews-track">
-            <!-- Review 1 -->
-            <div class="review-card">
-                <p class="review-text">"برای سالگرد ازدواجمون گرفتم. وقتی بارکد رو اسکن کرد و صدای خودم پخش شد، گریه‌اش گرفت. واقعا ممنونم."</p>
-                <div class="review-meta">خرید برای: همسر | طرح: چوب گردو</div>
-            </div>
-            <!-- Review 2 -->
-            <div class="review-card">
-                <p class="review-text">"خیلی با کیفیت بود. فکر نمیکردم پرینت سه بعدی انقدر تمیز دربیاد. رنگ مشکیش خیلی شیکه."</p>
-                <div class="review-meta">خرید برای: دفتر کار | طرح: پلیمر مشکی</div>
-            </div>
-            <!-- Review 3 -->
-            <div class="review-card">
-                <p class="review-text">"من عکس بچه‌م رو زدم روش برای روز مادر. بهترین کادویی بود که تا حالا به مادرم دادم."</p>
-                <div class="review-meta">خرید برای: مادر | طرح: چوب راش</div>
-            </div>
-             <!-- Review 4 -->
-             <div class="review-card">
-                <p class="review-text">"ایده صدا خیلی جالبه. بسته بندی هم عالی بود و سالم رسید دستم."</p>
-                <div class="review-meta">خرید برای: دوست | طرح: قرمز</div>
+    <div class="section-header text-center">
+        <h2 class="section-title">تجربه مشتریان ما</h2>
+    </div>
+    
+    <div class="slider-container" id="reviewSlider">
+        <button class="slider-btn prev-btn">❮</button>
+        <div class="slider-track-wrapper">
+            <div class="slider-track">
+                <!-- Items -->
+                <div class="slide-item">
+                    <div class="review-card">
+                        <p class="review-text">"برای سالگرد ازدواجمون گرفتم. وقتی بارکد رو اسکن کرد و صدای خودم پخش شد، گریه‌اش گرفت. واقعا ممنونم."</p>
+                        <span class="review-meta">خرید برای: همسر | طرح: چوب گردو</span>
+                    </div>
+                </div>
+                <div class="slide-item">
+                    <div class="review-card">
+                        <p class="review-text">"کیفیت ساخت چوب عالی بود و دقیقا همون صدایی که میخواستم رو داشت. ممنون از تیم خوبتون."</p>
+                        <span class="review-meta">سارا م. - تهران</span>
+                    </div>
+                </div>
+                <div class="slide-item">
+                    <div class="review-card">
+                        <p class="review-text">"بسته‌بندی خیلی شیک بود. فقط کاش زودتر به دستم می‌رسید ولی ارزش صبر کردن داشت."</p>
+                        <span class="review-meta">نگار ت. - مشهد</span>
+                    </div>
+                </div>
+                <div class="slide-item">
+                    <div class="review-card">
+                        <p class="review-text">"فکر نمیکردم انقدر دقیق بتونم شخصی سازی کنم. دمتون گرم."</p>
+                        <span class="review-meta">پویا ج. - اصفهان</span>
+                    </div>
+                </div>
+                 <div class="slide-item">
+                    <div class="review-card">
+                        <p class="review-text">"بهترین هدیه‌ای که تا حالا دادم. موزیک باکس واقعا حس نوستالژی داره."</p>
+                        <span class="review-meta">مریم ک. - تبریز</span>
+                    </div>
+                </div>
             </div>
         </div>
+        <button class="slider-btn next-btn">❯</button>
+    </div>
+</section>
+
+<!-- Gallery Section -->
+<section id="gallery" class="gallery-section">
+    <div class="section-header text-center" style="margin-bottom: 40px; text-align: center;">
+        <h2 class="section-title">گالری تصاویر ارسالی</h2>
+    </div>
+
+    <div class="slider-container" id="gallerySlider">
+        <button class="slider-btn prev-btn">❮</button>
+        <div class="slider-track-wrapper">
+            <div class="slider-track">
+                <div class="slide-item"><img src="https://picsum.photos/400/400?random=1" alt="نمونه کار ۱"></div>
+                <div class="slide-item"><img src="https://picsum.photos/400/400?random=2" alt="نمونه کار ۲"></div>
+                <div class="slide-item"><img src="https://picsum.photos/400/400?random=3" alt="نمونه کار ۳"></div>
+                <div class="slide-item"><img src="https://picsum.photos/400/400?random=4" alt="نمونه کار ۴"></div>
+                <div class="slide-item"><img src="https://picsum.photos/400/400?random=5" alt="نمونه کار ۵"></div>
+            </div>
+        </div>
+        <button class="slider-btn next-btn">❯</button>
     </div>
 </section>
 
@@ -277,357 +218,37 @@
     </details>
 </section>
 
-<!-- Loader Element -->
+<!-- Loader -->
 <div id="loader" class="loader" style="display:none">
     <div class="spinner"></div>
-    <p style="margin-top:10px">در حال آماده‌سازی کارگاه...</p>
+    <p style="margin-top:10px">در حال پردازش...</p>
 </div>
 
-<!-- ========================= LOGIC ========================= -->
-<script>
-// --- HERO ANIMATION ---
-const words = ["عشقت", "مادرت", "همکارت", "پدرت", "دوستت", "خودت"];
-let wordIdx = 0;
-const wordEl = document.getElementById('changingText');
-setInterval(() => {
-    wordEl.style.opacity = 0;
-    setTimeout(() => {
-        wordIdx = (wordIdx + 1) % words.length;
-        wordEl.innerText = words[wordIdx];
-        wordEl.style.opacity = 1;
-    }, 300);
-}, 2500);
+<!-- Order Modal -->
+<div id="orderModal" class="modal-overlay hidden">
+    <div class="modal-card">
+        <button class="close-modal">&times;</button>
+        <div class="modal-header">
+            <h3>ثبت نهایی سفارش</h3>
+            <p class="modal-note">
+                ⚠ تصویر طراحی شده <strong>دانلود شد</strong>. <br>
+                لطفاً تصویر دانلود شده را به همراه فایل موزیک خود از طریق یکی از راه‌های زیر ارسال کنید تا ساخت محصول آغاز شود.
+            </p>
+        </div>
+        <div class="social-buttons">
+            <a href="https://wa.me/989123456789" target="_blank" class="social-btn whatsapp">
+                ارسال در واتساپ
+            </a>
+            <a href="https://t.me/YourTelegramID" target="_blank" class="social-btn telegram">
+                ارسال در تلگرام
+            </a>
+            <a href="https://instagram.com/YourPage" target="_blank" class="social-btn instagram">
+                ارسال در اینستاگرام
+            </a>
+        </div>
+    </div>
+</div>
 
-// --- APP CONFIGURATION ---
-const TARGET_WIDTH = 1181;
-const TARGET_HEIGHT = 1051;
-
-const VIEW_DEFINITIONS = [
-  {
-    id: 'v1', name: 'ایستاده', isStatic: false,
-    points: [{x: 431,y: 172}, {x: 786,y: 178}, {x: 782,y: 643}, {x: 438,y: 715}]
-  },
-  {
-    id: 'v2', name: 'خوابیده', isStatic: false,
-    points: [{x: 324,y: 360}, {x: 602,y: 224}, {x: 900,y: 386}, {x: 601,y: 610}]
-  },
-  {
-    id: 'v3', name: 'پشت محصول', isStatic: true, 
-    points: [] // No warping points needed for static views
-  },
-  {
-    id: 'v4', name: 'کنار محصول', isStatic: true, 
-    points: [] // No warping points needed for static views
-  }
-];
-
-// Define Products and their specific images for each view
-const PRODUCT_CONFIG = {
-  "wood": {
-    name: "چوب طبیعی",
-    materials: {
-      beech: { 
-        name: "چوب راش", 
-        value: '#d1a377',
-        // Images must match the order of VIEW_DEFINITIONS (v1, v2, v3)
-        images: ['wood-beech-v1.png', 'wood-beech-v2.png', 'wood-beech-v3.png', 'wood-beech-v4.png'] 
-      },
-      walnut: { 
-        name: "چوب افرا", 
-        value: '#5d4037',
-        // Example filenames - you need to have these files!
-        images: ['wood-maple-v1.png', 'wood-maple-v2.png', 'wood-maple-v3.png', 'wood-maple-v4.png'] 
-      }
-    }
-  },
-  "3d-print": {
-    name: "پرینت سه بعدی",
-    materials: {
-      black: { 
-        name: "مشکی مات", 
-        value: '#333333',
-        images: ['black-v1.png', 'black-v2.png', 'black-v3.png', 'black-v4.png']
-      },
-      blue: { 
-        name: "سرمه ای", 
-        value: '#3B3E79',
-        images: ['blue-v1.png', 'blue-v2.png', 'blue-v3.png', 'blue-v4.png']
-      },
-      green: { 
-        name: "زیتونی", 
-        value: '#808000',
-        images: ['green-v1.png', 'green-v2.png', 'green-v3.png', 'green-v4.png']
-      },
-      marble: { 
-        name: "مرمری", 
-        value: '#e3e0cd',
-        images: ['marble-v1.png', 'marble-v2.png', 'marble-v3.png', 'marble-v4.png']
-      }
-    }
-  }
-};
-
-// --- APP STATE ---
-let state = {
-  typeId: "wood",
-  materialId: "beech",
-  viewId: "v1",
-  userImage: null,
-  offset: { x: 0, y: 0 },
-  scale: 100,
-  rotation: 0,
-  isDragging: false,
-  dragStart: { x: 0, y: 0 },
-  loadedImages: {}
-};
-
-// --- CORE FUNCTIONS ---
-function initApp() {
-    renderTypeOptions();
-    loadMaterial(state.typeId, state.materialId);
-}
-
-function showLoader(show) {
-    document.getElementById('loader').style.display = show ? 'flex' : 'none';
-}
-
-function loadMaterial(tid, mid) {
-    showLoader(true);
-    state.typeId = tid; 
-    state.materialId = mid;
-    renderMaterialOptions();
-    
-    // Update Label
-    document.getElementById('matName').innerText = PRODUCT_CONFIG[tid].materials[mid].name;
-
-    const paths = PRODUCT_CONFIG[tid].materials[mid].images;
-    let loaded = 0, total = VIEW_DEFINITIONS.length;
-
-    VIEW_DEFINITIONS.forEach((v, i) => {
-        const img = new Image();
-        img.src = paths[i];
-        img.onload = () => {
-            state.loadedImages[v.id] = img;
-            loaded++;
-            if(loaded===total) { showLoader(false); renderThumbnails(); renderMain(); }
-        };
-        img.onerror = () => { // Fallback for demo
-            console.warn("Image not found:", paths[i]);
-            loaded++;
-            if(loaded===total) { showLoader(false); renderThumbnails(); renderMain(); }
-        };
-    });
-}
-
-// --- RENDERING ---
-function createDesignBuffer() {
-    const cv = document.createElement('canvas');
-    cv.width = TARGET_WIDTH; cv.height = TARGET_HEIGHT;
-    const ctx = cv.getContext('2d');
-    
-    ctx.fillStyle = '#fff';
-    ctx.fillRect(0,0,TARGET_WIDTH,TARGET_HEIGHT);
-
-    if(state.userImage) {
-        ctx.save();
-        ctx.translate(TARGET_WIDTH/2 + state.offset.x, TARGET_HEIGHT/2 + state.offset.y);
-        ctx.rotate(state.rotation * Math.PI/180);
-        const s = state.scale/100;
-        ctx.scale(s,s);
-        ctx.drawImage(state.userImage, -state.userImage.width/2, -state.userImage.height/2);
-        ctx.restore();
-    }
-    return cv;
-}
-
-function renderMain() {
-    const canvas = document.getElementById('mainCanvas');
-    const ctx = canvas.getContext('2d');
-    const bg = state.loadedImages[state.viewId];
-    if(!bg) return;
-
-    canvas.width = bg.width; canvas.height = bg.height;
-    const design = createDesignBuffer();
-    const viewDef = VIEW_DEFINITIONS.find(v=>v.id===state.viewId);
-    
-    drawComposition(ctx, bg, design, viewDef);
-}
-
-function renderThumbnails() {
-    const c = document.getElementById('thumbsContainer');
-    c.innerHTML = '';
-    const design = createDesignBuffer();
-
-    VIEW_DEFINITIONS.forEach(v => {
-        const div = document.createElement('div');
-        div.className = `thumb-item ${state.viewId===v.id ? 'active':''}`;
-        div.onclick = () => { state.viewId = v.id; renderThumbnails(); renderMain(); checkTools(); };
-        
-        const cv = document.createElement('canvas');
-        const bg = state.loadedImages[v.id];
-        if(bg) {
-            cv.width = 150; cv.height = 150 * (bg.height/bg.width);
-            drawComposition(cv.getContext('2d'), bg, design, v, true);
-        }
-        div.appendChild(cv);
-        c.appendChild(div);
-    });
-}
-
-function drawComposition(ctx, bg, design, viewDef, isThumb=false) {
-    ctx.drawImage(bg, 0, 0, ctx.canvas.width, ctx.canvas.height);
-    
-    if(state.userImage && !viewDef.isStatic) {
-        const sx = ctx.canvas.width / bg.width;
-        const sy = ctx.canvas.height / bg.height;
-        const points = viewDef.points.map(p => ({x:p.x*sx, y:p.y*sy}));
-        warpImage(ctx, design, points, isThumb?10:30);
-    }
-}
-
-// Basic Perspective Warp (same as before)
-function warpImage(ctx, src, p, steps) {
-    const w = src.width, h = src.height;
-    for(let i=0; i<steps; i++) {
-        const t1 = i/steps, t2 = (i+1)/steps;
-        const p1 = lerp(p[0],p[3],t1), p2 = lerp(p[1],p[2],t1);
-        const p3 = lerp(p[0],p[3],t2), p4 = lerp(p[1],p[2],t2);
-        ctx.save();
-        ctx.beginPath(); ctx.moveTo(p1.x,p1.y); ctx.lineTo(p2.x,p2.y); ctx.lineTo(p4.x,p4.y); ctx.lineTo(p3.x,p3.y);
-        ctx.closePath(); ctx.clip();
-        const dx = p2.x-p1.x, dy = p2.y-p1.y;
-        const dist = Math.sqrt(dx*dx+dy*dy);
-        const angle = Math.atan2(dy,dx);
-        ctx.translate(p1.x,p1.y); ctx.rotate(angle);
-        ctx.drawImage(src, 0, h*t1, w, h/steps, 0, 0, dist, Math.sqrt(Math.pow(p1.x-p3.x,2)+Math.pow(p1.y-p3.y,2))+2);
-        ctx.restore();
-    }
-}
-function lerp(a,b,t){return{x:a.x+(b.x-a.x)*t,y:a.y+(b.y-a.y)*t}}
-
-// --- UI INTERACTIONS ---
-function renderTypeOptions() {
-    const c = document.getElementById('typeContainer'); c.innerHTML='';
-    for(let t in PRODUCT_CONFIG) {
-        let chip = document.createElement('div');
-        chip.className = `chip ${state.typeId===t?'active':''}`;
-        chip.innerText = PRODUCT_CONFIG[t].name;
-        chip.onclick = () => loadMaterial(t, Object.keys(PRODUCT_CONFIG[t].materials)[0]);
-        c.appendChild(chip);
-    }
-}
-
-function renderMaterialOptions() {
-    const c = document.getElementById('materialContainer'); c.innerHTML='';
-    const mats = PRODUCT_CONFIG[state.typeId].materials;
-    for(let m in mats) {
-        let dot = document.createElement('div');
-        dot.className = `color-dot ${state.materialId===m?'active':''}`;
-        dot.style.background = mats[m].value;
-        dot.title = mats[m].name;
-        dot.onclick = () => loadMaterial(state.typeId, m);
-        c.appendChild(dot);
-    }
-}
-
-// Upload & Tools
-const imgDrop = document.getElementById('imgDrop');
-const imgInp = document.getElementById('imgInput');
-imgDrop.onclick = () => imgInp.click();
-imgInp.onchange = e => {
-    if(e.target.files[0]) {
-        const r = new FileReader();
-        r.onload = ev => {
-            state.userImage = new Image();
-            state.userImage.onload = () => {
-                state.offset={x:0,y:0}; state.scale=100; state.rotation=0;
-                imgDrop.classList.add('done'); imgDrop.querySelector('div').innerText="✅ تصویر انتخاب شد";
-                checkTools(); renderMain(); renderThumbnails();
-                document.getElementById('buyBtn').disabled = false;
-            };
-            state.userImage.src = ev.target.result;
-        };
-        r.readAsDataURL(e.target.files[0]);
-    }
-};
-
-function checkTools() {
-    const tools = document.getElementById('tools');
-    const v = VIEW_DEFINITIONS.find(x=>x.id===state.viewId);
-    if(state.userImage && !v.isStatic) {
-        tools.style.display = 'flex';
-        tools.style.opacity = '1';
-        tools.style.pointerEvents = 'all';
-    } else {
-        tools.style.opacity = '0.3';
-        tools.style.pointerEvents = 'none';
-    }
-}
-
-// Canvas Drag
-const cvs = document.getElementById('mainCanvas');
-cvs.onmousedown = e => { if(state.userImage) { state.isDragging=true; state.dragStart={x:e.offsetX,y:e.offsetY}; } };
-cvs.onmousemove = e => { 
-    if(state.isDragging) {
-        state.offset.x += e.offsetX - state.dragStart.x;
-        state.offset.y += e.offsetY - state.dragStart.y;
-        state.dragStart={x:e.offsetX,y:e.offsetY};
-        renderMain();
-    }
-};
-window.onmouseup = () => { if(state.isDragging) { state.isDragging=false; renderThumbnails(); } }; // Re-render thumbs on drop
-
-// Audio
-document.getElementById('audioDrop').onclick = () => document.getElementById('audioInput').click();
-document.getElementById('audioInput').onchange = e => {
-    const f = e.target.files[0];
-    if(f && f.size < 4000000) {
-        document.getElementById('audioDrop').classList.add('done');
-        document.getElementById('audioLabel').innerText = f.name;
-    } else alert('حجم فایل باید کمتر از ۴ مگابایت باشد');
-};
-
-// Tools Listeners
-document.getElementById('rotBtn').onclick = () => { state.rotation = (state.rotation+90)%360; renderMain(); renderThumbnails(); };
-document.getElementById('zoomRange').oninput = e => { state.scale = parseInt(e.target.value); renderMain(); }; // Realtime main
-document.getElementById('zoomRange').onchange = () => renderThumbnails(); // Thumbs on release
-
-// Buy
-document.getElementById('buyBtn').onclick = () => {
-    const link = document.createElement('a');
-    link.download = 'Gift_Design.jpg';
-    link.href = createDesignBuffer().toDataURL('image/jpeg', 0.9);
-    link.click();
-};
-
-// --- AI LOGIC (THE "WIZARD") ---
-function applyAiSuggestion() {
-    const who = document.getElementById('aiWho').value;
-    const vibe = document.getElementById('aiVibe').value;
-    
-    if(!who || !vibe) { alert("لطفا هر دو گزینه را انتخاب کنید!"); return; }
-    
-    // Logic Table
-    let t = 'wood', m = 'beech';
-    
-    if(vibe === 'minimal' || who === 'friend') {
-        t = '3d-print'; m = 'black';
-    } else if (vibe === 'luxury' || who === 'colleague') {
-        t = 'wood'; m = 'walnut';
-    } else if (vibe === 'nature') {
-        t = 'wood'; m = 'beech';
-    }
-    
-    // Apply
-    loadMaterial(t, m);
-    
-    // Smooth Scroll to Customizer
-    document.getElementById('customizer').scrollIntoView({ behavior: 'smooth' });
-}
-
-// Start
-initApp();
-
-</script>
+<script src="script.js" defer></script>
 </body>
 </html>
